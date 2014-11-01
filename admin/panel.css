@@ -1,0 +1,14 @@
+#eol-doncorleone .donation {
+  padding: 4px 35px 4px 6px;
+  margin-bottom: 2px;
+  overflow-wrap: break-word;
+}
+#eol-doncorleone .column {
+  width: 100%;
+  margin: 0 4px;
+}
+#eol-doncorleone_list {
+  max-height: 250px;
+  overflow-y: scroll;
+  margin-bottom: 4px;
+}

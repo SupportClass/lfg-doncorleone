@@ -1,0 +1,37 @@
+mixin periodstats(period)
+    div(class="column js-#{period}")
+        .ncg-label(style="margin-top: 0px;") #{period} TOP
+        .js-amount(style="font-weight: bold; font-size: 200%;")
+        .js-username
+        .btn-group.btn-group-justified(style="margin-top: 4px;")
+            .btn-group
+                button.btn.btn-primary.btn-xs(data-toggle="modal" data-target="#eol-doncorleone_modal" data-period=period) Reset
+
+#eol-doncorleone.panel.panel-default.panel-span-2
+    .panel-heading
+        h3.panel-title Donation Stats
+        i.fa.fa-paypal.panel-icon
+    .panel-body
+        div(style="display: flex; text-align: center;")
+            +periodstats("day")
+            +periodstats("month")
+
+#eol-doncorleone_modal.modal.fade
+    .modal-dialog
+        .modal-content
+            .modal-header
+                button.close(type="button", data-dismiss="modal")
+                    span(aria-hidden="true") &#215;
+                    span.sr-only Close
+                h4.modal-title Reset Donation Stats
+            .modal-body
+                .alert.alert-info(role="alert")
+                    | "Month" and "Day" are not automatically determined. They only reset when you explictly tell them to.
+
+                <p>Are you sure you wish to reset <span class="js-period" style="font-weight: bold;"></span> stats?</p>
+            .modal-footer
+                button.btn.btn-danger.btn-xs.js-reset(type="button", data-dismiss="modal") Yes, reset
+                button.btn.btn-default.btn-xs(type="button", data-dismiss="modal") No, do not reset
+        // /.modal-content
+    // /.modal-dialog
+// /.modal

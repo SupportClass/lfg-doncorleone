@@ -1,0 +1,11 @@
+{
+    "name": "eol-doncorleone",
+    "version": "0.0.1",
+    "nodecgDependency": "~0.0.1",
+    "homepage": "http://alexvan.camp/",
+    "authors": [
+        "Alex Van Camp <email@alexvan.camp>"
+    ],
+    "description": "Shows donation stats from Barry's Donation tracker.",
+    "license": "Commercial"
+}
