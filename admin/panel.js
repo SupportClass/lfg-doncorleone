@@ -26,13 +26,13 @@ $(function () {
             monthusr = totals.month_top_packet.twitch_username;
         }
 
-        dayAmount.html(dayamt.formatMoney);
-        dayAmount.attr('title', dayamt.formatMoney);
+        dayAmount.html(dayamt.formatMoney());
+        dayAmount.attr('title', dayamt.formatMoney());
         dayUsername.html(dayusr);
         dayUsername.attr('title', dayusr);
 
-        monthAmount.html(monthamt.formatMoney);
-        monthAmount.attr('title', monthamt.formatMoney);
+        monthAmount.html(monthamt.formatMoney());
+        monthAmount.attr('title', monthamt.formatMoney());
         monthUsername.html(monthusr);
         monthUsername.attr('title', monthusr);
     }
