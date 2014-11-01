@@ -27,10 +27,12 @@ $(function () {
         }
 
         dayAmount.html(dayamt.formatMoney);
+        dayAmount.attr('title', dayamt);
         dayUsername.html(dayusr);
         dayUsername.attr('title', dayusr);
-        
+
         monthAmount.html(monthamt.formatMoney);
+        monthAmount.attr('title', monthamt);
         monthUsername.html(monthusr);
         monthUsername.attr('title', monthusr);
     }
