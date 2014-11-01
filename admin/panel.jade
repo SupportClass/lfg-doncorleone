@@ -2,7 +2,7 @@ mixin periodstats(period)
     div(class="column js-#{period}")
         .ncg-label(style="margin-top: 0px;") #{period} TOP
         .js-amount(style="font-weight: bold; font-size: 200%;")
-        .js-username
+        .js-username(style="overflow: hidden; text-overflow: ellipsis;")
         .btn-group.btn-group-justified(style="margin-top: 4px;")
             .btn-group
                 button.btn.btn-primary.btn-xs(data-toggle="modal" data-target="#eol-doncorleone_modal" data-period=period) Reset
