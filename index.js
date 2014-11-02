@@ -22,7 +22,7 @@ squirrel('barry-donations', function barryDonationsLoaded(err, BarryDonations) {
 });
 
 function initialized(data) {
-    console.log('[eol-doncorleone] Listening for donations...');
+    console.log('[eol-doncorleone] Listening for donations to', bd.username);
     cachedTotals = data.totals;
     io.sockets.json.send({
         bundleName: 'eol-doncorleone',
