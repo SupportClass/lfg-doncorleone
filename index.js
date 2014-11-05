@@ -1,5 +1,3 @@
-var express = require('express');
-var app = module.exports = express();
 var io = require('../../server.js');
 var squirrel = require('squirrel');
 var events = require('events'); //needed for barry-donations event listening
