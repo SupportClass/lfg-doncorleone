@@ -1,3 +1,5 @@
+'use strict';
+
 var io = require('../../server.js');
 var squirrel = require('squirrel');
 var events = require('events'); //needed for barry-donations event listening
