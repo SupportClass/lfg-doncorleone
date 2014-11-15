@@ -19,7 +19,7 @@ module.exports = function(nodecg) {
         bd.on('newdonations', gotDonations);
     });
 
-    nodecg.declareSyncedVar('totals', {});
+    nodecg.declareSyncedVar({ variableName: 'totals' });
 
     function initialized(data) {
         log.info('[eol-doncorleone] Listening for donations to', bd.options.username);

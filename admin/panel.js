@@ -6,31 +6,33 @@ $(function () {
     var monthAmount = panel.find('.js-month').find('.js-amount');
     var monthUsername = panel.find('.js-month').find('.js-username');
 
-    nodecg.declareSyncedVar('totals', {}, function (totals) {
-        var dayamt = 0;
-        var dayusr = 'N/A';
-        var monthamt = 0;
-        var monthusr = 'N/A';
+    nodecg.declareSyncedVar({ variableName: 'totals',
+        setter: function(totals){
+            var dayamt = 0;
+            var dayusr = 'N/A';
+            var monthamt = 0;
+            var monthusr = 'N/A';
 
-        if (totals.day_top_packet.amount > 0) {
-            dayamt = totals.day_top_packet.amount;
-            dayusr = totals.day_top_packet.twitch_username;
+            if (totals.day_top_packet.amount > 0) {
+                dayamt = totals.day_top_packet.amount;
+                dayusr = totals.day_top_packet.twitch_username;
+            }
+
+            if (totals.month_top_packet.amount > 0) {
+                monthamt = totals.month_top_packet.amount;
+                monthusr = totals.month_top_packet.twitch_username;
+            }
+
+            dayAmount.html(dayamt.formatMoney());
+            dayAmount.attr('title', dayamt.formatMoney());
+            dayUsername.html(dayusr);
+            dayUsername.attr('title', dayusr);
+
+            monthAmount.html(monthamt.formatMoney());
+            monthAmount.attr('title', monthamt.formatMoney());
+            monthUsername.html(monthusr);
+            monthUsername.attr('title', monthusr);
         }
-
-        if (totals.month_top_packet.amount > 0) {
-            monthamt = totals.month_top_packet.amount;
-            monthusr = totals.month_top_packet.twitch_username;
-        }
-
-        dayAmount.html(dayamt.formatMoney());
-        dayAmount.attr('title', dayamt.formatMoney());
-        dayUsername.html(dayusr);
-        dayUsername.attr('title', dayusr);
-
-        monthAmount.html(monthamt.formatMoney());
-        monthAmount.attr('title', monthamt.formatMoney());
-        monthUsername.html(monthusr);
-        monthUsername.attr('title', monthusr);
     });
 
     //triggered when modal is about to be shown
