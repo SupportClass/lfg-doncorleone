@@ -1,10 +1,8 @@
 'use strict';
 
+var log = require('../../lib/logger');
 var squirrel = require('squirrel');
-var events = require('events'); //needed for barry-donations event listening
-var config = require('../../lib/config');
 var fs = require('fs');
-var cachedTotals = null;
 
 var cfgPath = __dirname + '/config.json';
 if (!fs.existsSync(cfgPath)) {
@@ -15,28 +13,24 @@ var bd = null;
 
 module.exports = function(nodecg) {
     squirrel('barry-donations', function barryDonationsLoaded(err, BarryDonations) {
-        bdConfig.hostname = config.host;
+        bdConfig.hostname = nodecg.config.host;
         bd = new BarryDonations(bdConfig);
         bd.on('initialized', initialized);
         bd.on('newdonations', gotDonations);
     });
 
+    nodecg.declareSyncedVar('totals', {});
+
     function initialized(data) {
-        console.log('[eol-doncorleone] Listening for donations to', bd.options.username);
-        cachedTotals = data.totals;
-        nodecg.sendMessage('initialized', cachedTotals);
+        log.info('[eol-doncorleone] Listening for donations to', bd.options.username);
+        nodecg.variables.totals = data.totals;
     }
 
     function gotDonations(data) {
-        cachedTotals = data.totals;
-        nodecg.sendMessage('donations', cachedTotals);
+        nodecg.variables.totals = data.totals;
     }
 
-    nodecg.listenFor('getTotals', function getTotals(data, cb) {
-        cb(cachedTotals);
-    });
-
-    nodecg.listenFor('resetCategory', function resetCategory(data, cb) {
-        bd.resetCategory(data.content);
+    nodecg.listenFor('resetCategory', function resetCategory(data) {
+        bd.resetCategory(data);
     });
 };
