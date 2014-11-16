@@ -8,6 +8,9 @@ $(function () {
 
     nodecg.declareSyncedVar({ variableName: 'totals',
         setter: function(totals){
+            if (!totals)
+                return;
+
             var dayamt = 0;
             var dayusr = 'N/A';
             var monthamt = 0;
