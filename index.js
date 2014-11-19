@@ -34,6 +34,13 @@ function DonCorleone(nodecg) {
         bd.on('newdonations', function gotDonations(data) {
             nodecg.variables.totals = data.totals;
             nodecg.sendMessage('gotDonations', data);
+
+            // If the name is blank, change it to "undefined"
+            data.Completed.forEach(function(donation) {
+                if (donation.twitch_username == '')
+                    donation.twitch_username = 'Anonymous';
+            });
+
             self.emit('gotDonations', data);
         });
     });
