@@ -67,7 +67,7 @@ function DonCorleone(nodecg) {
                 log.info('[eol-doncorleone] Successfully reset:', category);
             })
             .fail(function(e) {
-               log.error('[eol-doncorleone]', e.message) ;
+                log.error('[eol-doncorleone]', e.message) ;
             });
     });
 }
