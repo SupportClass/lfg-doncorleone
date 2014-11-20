@@ -25,12 +25,25 @@ function DonCorleone(nodecg) {
         bdConfig.hostname = nodecg.config.host;
         bd = new BarryDonations(bdConfig);
 
+        bd.on('connectfail', function connectfail(e) {
+            log.error('[eol-doncorleone]', e.message)
+        });
+
+        bd.on('error', function error(e) {
+            log.error('[eol-doncorleone]', e.message)
+        });
+
+        bd.on('disconnected', function disconnected(e) {
+            log.error('[eol-doncorleone]', e.message)
+        });
+
         bd.on('initialized', function initialized(data) {
             log.info('[eol-doncorleone] Listening for donations to', bd.options.username);
             nodecg.variables.totals = data.totals;
             nodecg.sendMessage('initialized', data);
             self.emit('initialized', data);
         });
+
         bd.on('newdonations', function gotDonations(data) {
             nodecg.variables.totals = data.totals;
             nodecg.sendMessage('gotDonations', data);
@@ -49,7 +62,13 @@ function DonCorleone(nodecg) {
 
     nodecg.declareSyncedVar({ variableName: 'totals' });
     nodecg.listenFor('resetCategory', function resetCategory(data) {
-        bd.resetCategory(data);
+        bd.resetCategory(data)
+            .then(function(category) {
+                log.info('[eol-doncorleone] Successfully reset:', category);
+            })
+            .fail(function(e) {
+               log.error('[eol-doncorleone]', e.message) ;
+            });
     });
 }
 
