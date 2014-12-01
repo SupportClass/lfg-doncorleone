@@ -37,6 +37,10 @@ function DonCorleone(nodecg) {
             log.error('[eol-doncorleone]', e.message)
         });
 
+        bd.on('reconnecting', function reconnecting(interval) {
+           log.info('[eol-doncorleone] reconnecting in %d seconds', interval)
+        });
+
         bd.on('initialized', function initialized(data) {
             log.info('[eol-doncorleone] Listening for donations to', bd.options.username);
             nodecg.variables.totals = data.totals;
