@@ -1,20 +1,15 @@
 mixin periodstats(period)
     div(class="column js-#{period}")
         .ncg-label(style="margin-top: 0px;") #{period} TOP
-        .js-amount(style="font-weight: bold; font-size: 200%; overflow: hidden; text-overflow: ellipsis;")
-        .js-username(style="overflow: hidden; text-overflow: ellipsis;")
+        .js-amount(style="font-weight: bold; font-size: 200%; overflow: hidden; text-overflow: ellipsis;") ?
+        .js-username(style="overflow: hidden; text-overflow: ellipsis;") ?
         .btn-group.btn-group-justified(style="margin-top: 4px;")
             .btn-group
                 button.btn.btn-primary.btn-xs(data-toggle="modal" data-target="#eol-doncorleone_modal" data-period=period) Reset
 
-#eol-doncorleone.panel.panel-default.panel-span-2
-    .panel-heading
-        h3.panel-title Donation Stats
-        i.fa.fa-paypal.panel-icon
-    .panel-body
-        div(style="display: flex; text-align: center;")
-            +periodstats("day")
-            +periodstats("month")
+div(style="display: flex; text-align: center;")
+    +periodstats("day")
+    +periodstats("month")
 
 #eol-doncorleone_modal.modal.fade
     .modal-dialog

@@ -1,9 +1,9 @@
-#eol-doncorleone .donation {
+.eol-doncorleone .donation {
   padding: 4px 35px 4px 6px;
   margin-bottom: 2px;
   overflow-wrap: break-word;
 }
-#eol-doncorleone .column {
+.eol-doncorleone .column {
   width: 100%;
   margin: 0 4px;
 }

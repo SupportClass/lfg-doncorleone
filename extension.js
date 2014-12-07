@@ -1,16 +1,11 @@
 'use strict';
 
-var log = require('../../lib/logger');
+var log = require('../../lib/logger/index');
 var squirrel = require('squirrel');
 var fs = require('fs');
 var events = require('events');
 var util = require('util');
 
-var cfgPath = __dirname + '/config.json';
-if (!fs.existsSync(cfgPath)) {
-    throw new Error('[eol-doncorleone] config.json was not present in bundles/eol-doncorleone, aborting!');
-}
-var bdConfig = JSON.parse(fs.readFileSync(cfgPath, 'utf8'));
 var bd = null;
 
 function DonCorleone(nodecg) {
@@ -19,11 +14,16 @@ function DonCorleone(nodecg) {
     }
     DonCorleone.prototype._singletonInstance = this;
 
+    if (!nodecg.bundleConfig) {
+        throw new Error('[eol-doncorleone] No config found in cfg/eol-doncorleone.json, aborting!');
+    }
+
+    var bdConfig = nodecg.bundleConfig;
     var self = this;
 
     squirrel('barry-donations', function barryDonationsLoaded(err, BarryDonations) {
         bdConfig.hostname = nodecg.config.host;
-        bd = new BarryDonations(bdConfig);
+        bd = new BarryDonations(nodecg.bundleConfig);
 
         bd.on('connectfail', function connectfail(e) {
             log.error('[eol-doncorleone]', e.message)
