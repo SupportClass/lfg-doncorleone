@@ -1,6 +1,6 @@
 'use strict';
 
-var log = require('../../lib/logger');
+var log = require('../../lib/logger/index');
 var squirrel = require('squirrel');
 var fs = require('fs');
 var events = require('events');
