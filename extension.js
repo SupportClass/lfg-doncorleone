@@ -40,6 +40,10 @@ function DonCorleone(nodecg) {
         bd.on('reconnecting', function reconnecting(interval) {
            log.info('[eol-doncorleone] reconnecting in %d seconds', interval)
         });
+        
+        bd.on('reconnectfail', function reconnectfail(e) {
+           log.error('[eol-doncorleone]', e.message)
+        });
 
         bd.on('initialized', function initialized(data) {
             log.info('[eol-doncorleone] Listening for donations to', bd.options.username);
@@ -52,7 +56,7 @@ function DonCorleone(nodecg) {
             nodecg.variables.totals = data.totals;
             nodecg.sendMessage('gotDonations', data);
 
-            // If the name is blank, change it to "undefined"
+            // If the name is blank, change it to "Anonymous"
             data.Completed.forEach(function(donation) {
                 if (donation.twitch_username == '')
                     donation.twitch_username = 'Anonymous';
