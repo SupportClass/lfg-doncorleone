@@ -8,8 +8,7 @@ Also displays stats on the dashboard and easily allows the user to reset said st
 - Install to `nodecg/bundles/lfg-doncorleone`
 - Create `nodecg/cfg/lfg-doncorleone.json` with the username and password of the [Barry's Donation Tracker](http://don.barrycarlyon.co.uk) account
 that you wish to listen to:
-```
-#!json
+```json
 {
     "username": "myUsername",
     "password": "myPassword"
@@ -22,8 +21,7 @@ If you simply want to see top donations for the `day` and `month` periods on you
 
 ### In other bundles' view pages and dashboard panels
 If you would like to use this data in another bundle, add the following code to your view/panel:
-```
-#!javascript
+```javascript
 nodecg.listenFor('donation', 'lfg-doncorleone', callback);
 ```
 ... where 'callback' is the name of a function with the signature `function callback(data)`
@@ -33,8 +31,7 @@ If you want to use donation events in another bundle's extension,
 add `lfg-doncorleone` as a `bundleDependency` in your bundle's [`nodecg.json`](https://github.com/nodecg/nodecg/wiki/nodecg.json)
 
 Then add the following code:
-```
-#!javascript
+```javascript
 var donCorleone = nodecg.extensions['lfg-doncorleone'];
 
 donCorleone.on('initialized', function initialized(data) {
