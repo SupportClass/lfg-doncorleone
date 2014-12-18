@@ -9,11 +9,6 @@ var util = require('util');
 var bd = null;
 
 function DonCorleone(nodecg) {
-    if (DonCorleone.prototype._singletonInstance) {
-        return DonCorleone.prototype._singletonInstance;
-    }
-    DonCorleone.prototype._singletonInstance = this;
-
     if (!nodecg.bundleConfig) {
         throw new Error('[eol-doncorleone] No config found in cfg/eol-doncorleone.json, aborting!');
     }
