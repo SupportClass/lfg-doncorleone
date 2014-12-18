@@ -5,13 +5,13 @@ mixin periodstats(period)
         .js-username(style="overflow: hidden; text-overflow: ellipsis;") ?
         .btn-group.btn-group-justified(style="margin-top: 4px;")
             .btn-group
-                button.btn.btn-primary.btn-xs(data-toggle="modal" data-target="#eol-doncorleone_modal" data-period=period) Reset
+                button.btn.btn-primary.btn-xs(data-toggle="modal" data-target="#lfg-doncorleone_modal" data-period=period) Reset
 
 div(style="display: flex; text-align: center;")
     +periodstats("day")
     +periodstats("month")
 
-#eol-doncorleone_modal.modal.fade
+#lfg-doncorleone_modal.modal.fade
     .modal-dialog
         .modal-content
             .modal-header

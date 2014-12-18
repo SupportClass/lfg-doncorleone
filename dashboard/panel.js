@@ -1,6 +1,6 @@
 'use strict';
 
-var modal = $('#eol-doncorleone_modal');
+var modal = $('#lfg-doncorleone_modal');
 var panel = $bundle.filter('.donation-stats');
 var dayAmount = panel.find('.js-day').find('.js-amount');
 var dayUsername = panel.find('.js-day').find('.js-username');
@@ -61,6 +61,7 @@ Number.prototype.formatMoney = function(decPlaces, thouSeparator, decSeparator, 
     thouSeparator = thouSeparator == undefined ? "," : thouSeparator;
     currencySymbol = currencySymbol == undefined ? "$" : currencySymbol;
 
+    var j = null;
     var n = this,
         sign = n < 0 ? "-" : "",
         i = parseInt(n = Math.abs(+n || 0).toFixed(decPlaces)) + "",

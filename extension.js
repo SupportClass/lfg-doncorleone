@@ -9,8 +9,8 @@ var util = require('util');
 var bd = null;
 
 function DonCorleone(nodecg) {
-    if (!nodecg.bundleConfig) {
-        throw new Error('[eol-doncorleone] No config found in cfg/eol-doncorleone.json, aborting!');
+    if (!Object.keys(nodecg.bundleConfig).length) {
+        throw new Error('[lfg-doncorleone] No config found in cfg/lfg-doncorleone.json, aborting!');
     }
 
     var bdConfig = nodecg.bundleConfig;
@@ -21,27 +21,27 @@ function DonCorleone(nodecg) {
         bd = new BarryDonations(nodecg.bundleConfig);
 
         bd.on('connectfail', function connectfail(e) {
-            log.error('[eol-doncorleone]', e.message)
+            log.error('[lfg-doncorleone]', e.message)
         });
 
         bd.on('error', function error(e) {
-            log.error('[eol-doncorleone]', e.message)
+            log.error('[lfg-doncorleone]', e.message)
         });
 
         bd.on('disconnected', function disconnected(e) {
-            log.error('[eol-doncorleone]', e.message)
+            log.error('[lfg-doncorleone]', e.message)
         });
 
         bd.on('reconnecting', function reconnecting(interval) {
-           log.info('[eol-doncorleone] reconnecting in %d seconds', interval)
+           log.info('[lfg-doncorleone] reconnecting in %d seconds', interval)
         });
         
         bd.on('reconnectfail', function reconnectfail(e) {
-           log.error('[eol-doncorleone]', e.message)
+           log.error('[lfg-doncorleone]', e.message)
         });
 
         bd.on('initialized', function initialized(data) {
-            log.info('[eol-doncorleone] Listening for donations to', bd.options.username);
+            log.info('[lfg-doncorleone] Listening for donations to', bd.options.username);
             nodecg.variables.totals = data.totals;
             nodecg.sendMessage('initialized', data);
             self.emit('initialized', data);
@@ -67,10 +67,10 @@ function DonCorleone(nodecg) {
     nodecg.listenFor('resetCategory', function resetCategory(data) {
         bd.resetCategory(data)
             .then(function(category) {
-                log.info('[eol-doncorleone] Successfully reset:', category);
+                log.info('[lfg-doncorleone] Successfully reset:', category);
             })
             .fail(function(e) {
-                log.error('[eol-doncorleone]', e.message) ;
+                log.error('[lfg-doncorleone]', e.message) ;
             });
     });
 }
