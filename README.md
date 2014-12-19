@@ -53,3 +53,6 @@ donCorleone.on('gotDonations', function gotDonations(data) {
 ));
 ```
 
+### License
+lfg-doncorleone is provided under the MIT license, which is available to read in the [LICENSE][] file.
+[license]: LICENSE
