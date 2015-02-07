@@ -35,10 +35,6 @@ function DonCorleone(nodecg) {
         nodecg.log.info('reconnecting in %d seconds', interval);
     });
 
-    bd.on('reconnectfail', function reconnectfail(e) {
-        nodecg.log.error(e.message);
-    });
-
     bd.on('initialized', function initialized(data) {
         nodecg.log.info('Listening for donations to', bd.options.username);
         nodecg.variables.totals = data.totals;
