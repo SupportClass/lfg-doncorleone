@@ -20,15 +20,15 @@ function DonCorleone(nodecg) {
     bd = new BarryDonations(nodecg.bundleConfig);
 
     bd.on('connectfail', function connectfail(e) {
-        nodecg.log.error(e.message);
+        nodecg.log.error('Connectfail:', e.stack);
     });
 
     bd.on('error', function error(e) {
-        nodecg.log.error(e.message);
+        nodecg.log.error('Error:', e.stack);
     });
 
     bd.on('disconnected', function disconnected(e) {
-        nodecg.log.error(e.message);
+        nodecg.log.error('Disconnected:', e.stack);
     });
 
     bd.on('reconnecting', function reconnecting(interval) {
@@ -62,7 +62,7 @@ function DonCorleone(nodecg) {
                 nodecg.log.info('Successfully reset:', category);
             })
             .fail(function(e) {
-                nodecg.log.error(e.message) ;
+                nodecg.log.error('Failed to reset:', e.stack) ;
             });
     });
 }
