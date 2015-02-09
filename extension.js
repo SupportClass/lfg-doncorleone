@@ -56,13 +56,13 @@ function DonCorleone(nodecg) {
     });
 
     nodecg.declareSyncedVar({ variableName: 'totals' });
-    nodecg.listenFor('resetCategory', function resetCategory(data) {
-        bd.resetCategory(data)
-            .then(function(category) {
-                nodecg.log.info('Successfully reset:', category);
+    nodecg.listenFor('resetCategory', function resetCategory(category) {
+        bd.resetCategory(category)
+            .then(function(cat) {
+                nodecg.log.info('Successfully reset:', cat);
             })
             .fail(function(e) {
-                nodecg.log.error('Failed to reset:', e.stack) ;
+                nodecg.log.error('Failed to reset %s:', category, e.message) ;
             });
     });
 }
