@@ -56,7 +56,7 @@ modal.find('.js-reset').click(function() {
 });
 
 function formatMoney(n) {
-    if (!n) return;
+    if (!n) return '$0';
     // hilarious regex stolen from http://stackoverflow.com/a/14428340/3903335
     return '$' + n.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
 }
