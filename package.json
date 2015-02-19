@@ -1,4 +1,5 @@
 {
+  "name": "lfg-doncorleone",
   "dependencies": {
     "barry-donations": "^2.2.3"
   }
