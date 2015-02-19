@@ -1,7 +1,7 @@
 {
     "name": "lfg-doncorleone",
     "version": "1.0.0",
-    "nodecgDependency": "~0.4.0",
+    "nodecgDependency": "~0.5.0",
     "homepage": "http://alexvan.camp/",
     "authors": [
         "Alex Van Camp <email@alexvan.camp>"
@@ -11,8 +11,5 @@
     "extension": {
         "express": false,
         "path": "extension.js"
-    },
-    "dependencies": {
-        "barry-donations": "^2.1.9"
     }
 }
