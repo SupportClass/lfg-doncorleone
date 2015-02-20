@@ -17,15 +17,17 @@ nodecg.declareSyncedVar({ variableName: 'totals',
         var dayusr = 'N/A';
         var monthamt = 0;
         var monthusr = 'N/A';
+        var dayTopPkt = totals.day_top_packet;
+        var monthTopPkt = totals.month_top_packet;
 
-        if (totals.day_top_packet.amount > 0) {
-            dayamt = totals.day_top_packet.amount;
-            dayusr = totals.day_top_packet.twitch_username;
+        if (dayTopPkt && dayTopPkt.amount > 0) {
+            dayamt = dayTopPkt.amount;
+            dayusr = dayTopPkt.twitch_username;
         }
 
-        if (totals.month_top_packet.amount > 0) {
-            monthamt = totals.month_top_packet.amount;
-            monthusr = totals.month_top_packet.twitch_username;
+        if (monthTopPkt && monthTopPkt.amount > 0) {
+            monthamt = monthTopPkt.amount;
+            monthusr = monthTopPkt.twitch_username;
         }
 
         dayAmount.html(formatMoney(dayamt));
