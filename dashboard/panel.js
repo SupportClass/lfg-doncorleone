@@ -9,7 +9,7 @@ var monthAmount = panel.find('.js-month').find('.js-amount');
 var monthUsername = panel.find('.js-month').find('.js-username');
 
 var totals = nodecg.Replicant('totals');
-totals.on('change', function(newVal, change) {
+totals.on('change', function(oldVal, newVal) {
     if (!newVal) return;
 
     var dayamt = 0;
