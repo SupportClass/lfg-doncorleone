@@ -8,38 +8,36 @@ var dayUsername = panel.find('.js-day').find('.js-username');
 var monthAmount = panel.find('.js-month').find('.js-amount');
 var monthUsername = panel.find('.js-month').find('.js-username');
 
-nodecg.declareSyncedVar({ variableName: 'totals',
-    setter: function(totals){
-        if (!totals)
-            return;
+var totals = nodecg.Replicant('totals');
+totals.on('change', function(newVal, change) {
+    if (!newVal) return;
 
-        var dayamt = 0;
-        var dayusr = 'N/A';
-        var monthamt = 0;
-        var monthusr = 'N/A';
-        var dayTopPkt = totals.day_top_packet;
-        var monthTopPkt = totals.month_top_packet;
+    var dayamt = 0;
+    var dayusr = 'N/A';
+    var monthamt = 0;
+    var monthusr = 'N/A';
+    var dayTopPkt = newVal.day_top_packet;
+    var monthTopPkt = newVal.month_top_packet;
 
-        if (dayTopPkt && dayTopPkt.amount > 0) {
-            dayamt = dayTopPkt.amount;
-            dayusr = dayTopPkt.twitch_username;
-        }
-
-        if (monthTopPkt && monthTopPkt.amount > 0) {
-            monthamt = monthTopPkt.amount;
-            monthusr = monthTopPkt.twitch_username;
-        }
-
-        dayAmount.html(formatMoney(dayamt));
-        dayAmount.attr('title', formatMoney(dayamt));
-        dayUsername.html(dayusr);
-        dayUsername.attr('title', dayusr);
-
-        monthAmount.html(formatMoney(monthamt));
-        monthAmount.attr('title', formatMoney(monthamt));
-        monthUsername.html(monthusr);
-        monthUsername.attr('title', monthusr);
+    if (dayTopPkt && dayTopPkt.amount > 0) {
+        dayamt = dayTopPkt.amount;
+        dayusr = dayTopPkt.twitch_username;
     }
+
+    if (monthTopPkt && monthTopPkt.amount > 0) {
+        monthamt = monthTopPkt.amount;
+        monthusr = monthTopPkt.twitch_username;
+    }
+
+    dayAmount.html(formatMoney(dayamt));
+    dayAmount.attr('title', formatMoney(dayamt));
+    dayUsername.html(dayusr);
+    dayUsername.attr('title', dayusr);
+
+    monthAmount.html(formatMoney(monthamt));
+    monthAmount.attr('title', formatMoney(monthamt));
+    monthUsername.html(monthusr);
+    monthUsername.attr('title', monthusr);
 });
 
 //triggered when modal is about to be shown

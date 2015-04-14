@@ -37,13 +37,13 @@ function DonCorleone(nodecg) {
 
     bd.on('initialized', function initialized(data) {
         nodecg.log.info('Listening for donations to', bd.options.username);
-        nodecg.variables.totals = data.totals;
+        totals.value = data.totals;
         nodecg.sendMessage('initialized', data);
         self.emit('initialized', data);
     });
 
     bd.on('newdonations', function gotDonations(data) {
-        nodecg.variables.totals = data.totals;
+        totals.value = data.totals;
         nodecg.sendMessage('gotDonations', data);
 
         // If the name is blank, change it to "Anonymous"
@@ -55,7 +55,7 @@ function DonCorleone(nodecg) {
         self.emit('gotDonations', data);
     });
 
-    nodecg.declareSyncedVar({ variableName: 'totals' });
+    var totals = nodecg.Replicant('totals', { defaultValue: {}, persistent: false });
     nodecg.listenFor('resetCategory', function resetCategory(category) {
         bd.resetCategory(category)
             .then(function(cat) {
