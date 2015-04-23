@@ -16,7 +16,7 @@ function DonCorleone(nodecg) {
     var self = this;
     events.EventEmitter.call(this);
 
-    bdConfig.hostname = nodecg.config.baseURL || nodecg.config.host;
+    bdConfig.hostname = nodecg.config.host;
     bd = new BarryDonations(nodecg.bundleConfig);
 
     bd.on('connectfail', function connectfail(e) {
@@ -48,8 +48,9 @@ function DonCorleone(nodecg) {
 
         // If the name is blank, change it to "Anonymous"
         data.Completed.forEach(function(donation) {
-            if (donation.twitch_username === '')
+            if (donation.twitch_username === '') {
                 donation.twitch_username = 'Anonymous';
+            }
         });
 
         self.emit('gotDonations', data);
