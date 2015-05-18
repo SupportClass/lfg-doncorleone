@@ -20,7 +20,7 @@ function DonCorleone(nodecg) {
     bd = new BarryDonations(nodecg.bundleConfig);
 
     bd.on('connectfail', function connectfail(e) {
-        nodecg.log.error('Connectfail:', e.stack);
+        nodecg.log.error('Connectfail:', e.message);
     });
 
     bd.on('error', function error(e) {
