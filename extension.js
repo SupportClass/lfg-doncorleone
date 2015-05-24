@@ -16,8 +16,7 @@ function DonCorleone(nodecg) {
     var self = this;
     events.EventEmitter.call(this);
 
-    var protocol = nodecg.config.ssl.enabled ? 'https://' : 'http://';
-    bdConfig.hostname = protocol + nodecg.config.host;
+    bdConfig.hostname = nodecg.config.host;
     bd = new BarryDonations(nodecg.bundleConfig);
 
     bd.on('connectfail', function connectfail(e) {
