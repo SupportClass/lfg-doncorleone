@@ -1,6 +1,6 @@
 {
   "name": "lfg-doncorleone",
   "dependencies": {
-    "barry-donations": "^2.3.0"
+    "barry-donations": "^2.3.1"
   }
 }
