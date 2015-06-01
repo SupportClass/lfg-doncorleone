@@ -37,12 +37,15 @@ function DonCorleone(nodecg) {
 
     bd.on('initialized', function initialized(data) {
         nodecg.log.info('Listening for donations to', bd.options.username);
+        convertNamelessTopDonorsToAnonymous(data.totals);
+        if (donation.twitch_username === '') donation.twitch_username = 'Anonymous';
         nodecg.variables.totals = data.totals;
         nodecg.sendMessage('initialized', data);
         self.emit('initialized', data);
     });
 
     bd.on('newdonations', function gotDonations(data) {
+        convertNamelessTopDonorsToAnonymous(data.totals);
         nodecg.variables.totals = data.totals;
         nodecg.sendMessage('gotDonations', data);
 
@@ -65,6 +68,20 @@ function DonCorleone(nodecg) {
                 nodecg.log.error('Failed to reset %s:', category, e.message) ;
             });
     });
+    
+    function convertNamelessTopDonorsToAnonymous(totals) {
+        if (totals) {
+            if (totals.day_top_packet 
+                && totals.day_top_packet.twitch_username === '') {
+                totals.day_top_packet.twitch_username = 'Anonymous';
+            }
+            
+            if (totals.month_top_packet 
+                && totals.month_top_packet.twitch_username === '') {
+                totals.month_top_packet.twitch_username = 'Anonymous';
+            }
+        }
+    }
 }
 
 util.inherits(DonCorleone, events.EventEmitter);
