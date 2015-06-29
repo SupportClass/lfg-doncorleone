@@ -20,7 +20,7 @@ function DonCorleone(nodecg) {
     bd = new BarryDonations(nodecg.bundleConfig);
 
     bd.on('connectfail', function connectfail(e) {
-        nodecg.log.error('Connectfail:', e.stack);
+        nodecg.log.error('Connectfail:', e.message);
     });
 
     bd.on('error', function error(e) {
@@ -38,27 +38,27 @@ function DonCorleone(nodecg) {
     bd.on('initialized', function initialized(data) {
         nodecg.log.info('Listening for donations to', bd.options.username);
         convertNamelessTopDonorsToAnonymous(data.totals);
-        if (donation.twitch_username === '') donation.twitch_username = 'Anonymous';
-        nodecg.variables.totals = data.totals;
+        totals.value = data.totals;
         nodecg.sendMessage('initialized', data);
         self.emit('initialized', data);
     });
 
     bd.on('newdonations', function gotDonations(data) {
         convertNamelessTopDonorsToAnonymous(data.totals);
-        nodecg.variables.totals = data.totals;
+        totals.value = data.totals;
         nodecg.sendMessage('gotDonations', data);
 
         // If the name is blank, change it to "Anonymous"
         data.Completed.forEach(function(donation) {
-            if (donation.twitch_username === '')
+            if (donation.twitch_username === '') {
                 donation.twitch_username = 'Anonymous';
+            }
         });
 
         self.emit('gotDonations', data);
     });
 
-    nodecg.declareSyncedVar({ variableName: 'totals' });
+    var totals = nodecg.Replicant('totals', { defaultValue: {}, persistent: false });
     nodecg.listenFor('resetCategory', function resetCategory(category) {
         bd.resetCategory(category)
             .then(function(cat) {
