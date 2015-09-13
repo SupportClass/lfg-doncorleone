@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="components/paper-styles/paper-styles.html">
+    <link rel="import" href="components/paper-button/paper-button.html">
+    <style>
+        paper-button {
+            margin-top: 8px;
+            margin-bottom: 0;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+"Month" and "Day" are not automatically determined. They only reset when you explicitly tell them to.
+<p>
+    Are you sure you wish to reset day stats?
+</p>
+
+<paper-button id="reset" raised>Yes, reset</paper-button>
+<script>
+    (function () {
+        var resetBtn = document.querySelector('#reset');
+
+        resetBtn.addEventListener('click', function() {
+            nodecg.sendMessage('resetCategory', 'day_top');
+        });
+    })();
+</script>
+
+</body>
+</html>

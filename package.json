@@ -1,6 +1,38 @@
 {
   "name": "lfg-doncorleone",
+  "version": "1.0.0",
+  "homepage": "http://alexvan.camp/",
+  "authors": [
+    "Alex Van Camp <email@alexvan.camp>"
+  ],
+  "description": "Shows donation stats from Barry's Donation tracker.",
+  "license": "MIT",
   "dependencies": {
     "barry-donations": "^2.3.1"
+  },
+  "nodecg": {
+    "compatibleRange": "~0.7.0",
+    "dashboardPanels": [
+      {
+        "name": "donation-stats",
+        "title": "Donation Stats",
+        "width": 2,
+        "file": "panel.html"
+      },
+      {
+        "name": "reset-day",
+        "title": "Reset Day",
+        "width": 2,
+        "file": "reset-day.html",
+        "dialog": true
+      },
+      {
+        "name": "reset-month",
+        "title": "Reset Month",
+        "width": 2,
+        "file": "reset-month.html",
+        "dialog": true
+      }
+    ]
   }
 }

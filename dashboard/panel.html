@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="components/paper-styles/paper-styles.html">
+    <link rel="import" href="components/paper-button/paper-button.html">
+    <style>
+        paper-button {
+            margin-top: 8px;
+            margin-bottom: 0;
+            display: block;
+        }
+
+        .column {
+            width: 100%;
+            margin: 0 4px;
+        }
+    </style>
+</head>
+<body>
+<div style="display: flex; text-align: center">
+    <div id="day" class="column">
+        <h4>DAY TOP</h4>
+        <span class="amount">?</span>
+        <span class="username">?</span>
+        <paper-button nodecg-dialog="reset-day" raised>Reset</paper-button>
+    </div>
+    <div id="month" class="column">
+        <h4>MONTH TOP</h4>
+        <span class="amount">?</span>
+        <span class="username">?</span>
+        <paper-button nodecg-dialog="reset-month" raised>Reset</paper-button>
+    </div>
+</div>
+<script>
+    (function () {
+        var dayAmount = document.querySelector('#day .amount');
+        var dayUsername = document.querySelector('#day .username');
+        var monthAmount = document.querySelector('#month .amount');
+        var monthUsername = document.querySelector('#month .username');
+
+        var totals = nodecg.Replicant('totals')
+            .on('change', function(oldVal, newVal) {
+                if (!newVal) return;
+
+                var dayamt = 0;
+                var dayusr = 'N/A';
+                var monthamt = 0;
+                var monthusr = 'N/A';
+                var dayTopPkt = newVal.day_top_packet;
+                var monthTopPkt = newVal.month_top_packet;
+
+                if (dayTopPkt && dayTopPkt.amount > 0) {
+                    dayamt = dayTopPkt.amount;
+                    dayusr = dayTopPkt.twitch_username;
+                }
+
+                if (monthTopPkt && monthTopPkt.amount > 0) {
+                    monthamt = monthTopPkt.amount;
+                    monthusr = monthTopPkt.twitch_username;
+                }
+
+                dayAmount.html(formatMoney(dayamt));
+                dayAmount.attr('title', formatMoney(dayamt));
+                dayUsername.html(dayusr);
+                dayUsername.attr('title', dayusr);
+
+                monthAmount.html(formatMoney(monthamt));
+                monthAmount.attr('title', formatMoney(monthamt));
+                monthUsername.html(monthusr);
+                monthUsername.attr('title', monthusr);
+            });
+
+        function formatMoney(n) {
+            if (!n) return '$0';
+            // hilarious regex stolen from http://stackoverflow.com/a/14428340/3903335
+            return '$' + n.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        }
+    })();
+</script>
+
+</body>
+</html>
