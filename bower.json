@@ -1,6 +1,6 @@
 {
   "name": "lfg-doncorleone",
   "dependencies": {
-    "paper-button": "PolymerElements/paper-button#~1.0.3"
+    "paper-button": "PolymerElements/paper-button#^1.0.12"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "lfg-doncorleone",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "homepage": "http://alexvan.camp/",
   "authors": [
     "Alex Van Camp <email@alexvan.camp>"
@@ -8,10 +8,10 @@
   "description": "Shows donation stats from Barry's Donation tracker.",
   "license": "MIT",
   "dependencies": {
-    "barry-donations": "^2.3.1"
+    "barry-donations": "^2.3.2"
   },
   "nodecg": {
-    "compatibleRange": "~0.7.0",
+    "compatibleRange": "^1.0.0",
     "dashboardPanels": [
       {
         "name": "donation-stats",

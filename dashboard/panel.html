@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
-    <link rel="stylesheet" href="components/paper-styles/paper-styles.html">
-    <link rel="import" href="components/paper-button/paper-button.html">
+    <script src="../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <link rel="stylesheet" href="../bower_components/paper-styles/paper-styles.html">
+    <link rel="import" href="../bower_components/paper-button/paper-button.html">
     <style>
         paper-button {
             margin-top: 8px;
@@ -61,15 +62,15 @@
                     monthusr = monthTopPkt.twitch_username;
                 }
 
-                dayAmount.html(formatMoney(dayamt));
-                dayAmount.attr('title', formatMoney(dayamt));
-                dayUsername.html(dayusr);
-                dayUsername.attr('title', dayusr);
+                dayAmount.innerHTML = formatMoney(dayamt);
+                dayAmount.setAttribute('title', formatMoney(dayamt));
+                dayUsername.innerHTML = dayusr;
+                dayUsername.setAttribute('title', dayusr);
 
-                monthAmount.html(formatMoney(monthamt));
-                monthAmount.attr('title', formatMoney(monthamt));
-                monthUsername.html(monthusr);
-                monthUsername.attr('title', monthusr);
+                monthAmount.innerHTML = formatMoney(monthamt);
+                monthAmount.setAttribute('title', formatMoney(monthamt));
+                monthUsername.innerHTML = monthusr;
+                monthUsername.setAttribute('title', monthusr);
             });
 
         function formatMoney(n) {

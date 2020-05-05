@@ -1,4 +1,4 @@
-#lfg-doncorleone
+# lfg-doncorleone
 This is a [NodeCG](http://github.com/nodecg/nodecg) bundle.
 
 Listens for donations to a given account on [Barry's Donation Tracker](http://don.barrycarlyon.co.uk) and emits API events for other bundles to use.
@@ -22,7 +22,7 @@ If you simply want to see top donations for the `day` and `month` periods on you
 ### In other bundles' view pages and dashboard panels
 If you would like to use this data in another bundle, add the following code to your view/panel:
 ```javascript
-nodecg.listenFor('donation', 'lfg-doncorleone', callback);
+nodecg.listenFor('tip', 'lfg-doncorleone', callback);
 ```
 ... where 'callback' is the name of a function with the signature `function callback(data)`
 
