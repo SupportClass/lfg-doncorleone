@@ -1,9 +1,0 @@
-[
-  {
-    "name": "donation-stats",
-    "title": "Donation Stats",
-    "width": 2,
-    "file": "panel.jade",
-    "faIcon": "fa-paypal"
-  }
-]

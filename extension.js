@@ -13,10 +13,13 @@ function DonCorleone(nodecg) {
     }
 
     var bdConfig = nodecg.bundleConfig;
+    if (!bdConfig.hostname) {
+        bdConfig.hostname = nodecg.config.host;
+    }
+
     var self = this;
     events.EventEmitter.call(this);
 
-    bdConfig.hostname = nodecg.config.host;
     bd = new BarryDonations(nodecg.bundleConfig);
 
     bd.on('connectfail', function connectfail(e) {
@@ -46,7 +49,6 @@ function DonCorleone(nodecg) {
     bd.on('newdonations', function gotDonations(data) {
         convertNamelessTopDonorsToAnonymous(data.totals);
         totals.value = data.totals;
-        nodecg.sendMessage('gotDonations', data);
 
         // If the name is blank, change it to "Anonymous"
         data.Completed.forEach(function(donation) {
@@ -55,7 +57,8 @@ function DonCorleone(nodecg) {
             }
         });
 
-        self.emit('gotDonations', data);
+        nodecg.sendMessage('tip', data);
+        self.emit('tip', data);
     });
 
     var totals = nodecg.Replicant('totals', { defaultValue: {}, persistent: false });
@@ -68,15 +71,15 @@ function DonCorleone(nodecg) {
                 nodecg.log.error('Failed to reset %s:', category, e.message) ;
             });
     });
-    
+
     function convertNamelessTopDonorsToAnonymous(totals) {
         if (totals) {
-            if (totals.day_top_packet 
+            if (totals.day_top_packet
                 && totals.day_top_packet.twitch_username === '') {
                 totals.day_top_packet.twitch_username = 'Anonymous';
             }
-            
-            if (totals.month_top_packet 
+
+            if (totals.month_top_packet
                 && totals.month_top_packet.twitch_username === '') {
                 totals.month_top_packet.twitch_username = 'Anonymous';
             }
